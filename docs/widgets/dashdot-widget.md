@@ -85,6 +85,13 @@ Please note that iframes can be considered dangerous under some circumstances - 
 
 If you want to proceed, you must configure this header on your reverse proxy: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options. Generally, in most cases you want to use ``SAMEORIGIN``. ``ALLOW-FROM <uri>`` is obsolete and no longer works in most browsers.
 
+###Reverse Proxy with NGINX - Example for multiple instances of Dash.
+Because Dash. uses iframes to display the graphs, you can run into problems when using a reverse proxy to access them.  There are two ways you can do this, either by using subdomains for each instance of Dash. or by using subpaths.  
+
+You can use a subdomain for each instance of Dash. and simply use instanceone.domain.come, instancetwo.domain.com, instancethree.domain.com, ect. for your instances, and simply point anything sent to that domain to your Dash. instance in NGINX.  That would require seperate configuration files and subdomains for each instance.  (INSERT EXAMPLE OF THAT HERE)
+
+You can also use subpaths, which only requires one subdomain and configuration file for each, allowing your Dash. and your Homarr instances to all exist on the same subdomain.  However, when Homarr attempts to pull the iframes, it will attempt to pull from sub.domain.com/assets, instead of sub.domain.com/instance/assets.  So, you simply rewrite the incomming requests and modify the path, and that will connect your Homarr and Dash. instances.  (INSERT EXAMPLE OF THAT HERE)
+
 ---
 
 ## Screenshots
